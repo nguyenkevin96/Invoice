@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Invoice.models;
-using Invoice.Models;
+using Invoice.Repository;
 
 namespace Invoice.Controllers
 {
@@ -14,7 +14,12 @@ namespace Invoice.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        ProductDAO prodContext = new ProductDAO();
+        private readonly IProductRepository prodContext;
+
+        public ProductsController(IProductRepository context)
+        {
+            prodContext = context;
+        }
 
         // GET: api/Products
         [HttpGet]

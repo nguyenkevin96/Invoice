@@ -1,4 +1,5 @@
 using Invoice.models;
+using Invoice._services;
 using Invoice.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,12 +32,12 @@ namespace Invoice
                 configuration.RootPath = "ClientApp/build";
             });
 
-            services.AddDbContext<InvoiceContext>(options => 
+            services.AddDbContext<InvoiceContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("InvoiceDatabase")));
 
             //Scoped creates a new instance of the dbContext, however the same instance
             //will be called as long as the request is being made in the same webpage
-            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IInvoiceRepository, InvoiceRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,12 +57,14 @@ namespace Invoice
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller}/{action=Index}/{id?}");
-            });
+            // app.UseMvc(routes =>
+            // {
+            //     routes.MapRoute(
+            //         name: "default",
+            //         template: "{controller}/{action=Index}/{id?}");
+            // });
+
+            app.UseMvc();
 
             app.UseSpa(spa =>
             {

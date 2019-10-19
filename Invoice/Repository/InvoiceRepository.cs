@@ -1,16 +1,14 @@
 ﻿using Invoice.models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Invoice._services;
 
 namespace Invoice.Repository
 {
-    public class ProductRepository : IProductRepository
+    public class InvoiceRepository : IInvoiceRepository
     {
         private readonly InvoiceContext _context;
 
-        public ProductRepository(InvoiceContext context)
+        public InvoiceRepository(InvoiceContext context)
         {
             _context = context;
         }
@@ -24,6 +22,17 @@ namespace Invoice.Repository
         {
             Product prod = _context.Product.Find(id);
             return prod;
+        }
+
+        public IEnumerable<Customer> GetAllCustomers()
+        {
+            return _context.Customer;
+        }
+
+        public Customer GetCustomer(int id)
+        {
+            Customer customer = _context.Customer.Find(id);
+            return customer;
         }
     }
 }

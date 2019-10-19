@@ -1,14 +1,14 @@
 ﻿using Invoice.models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
-namespace Invoice.Repository
+namespace Invoice._services
 {
-    public interface IProductRepository
+    public interface IInvoiceRepository
     {
         IEnumerable<Product> GetAllProducts();
+        IEnumerable<Customer> GetAllCustomers();
         Product GetProduct(int id);
+        Customer GetCustomer(int id);
     }
 }

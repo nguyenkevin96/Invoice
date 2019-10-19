@@ -37,7 +37,7 @@ namespace Invoice.Controllers
             return prodContext.GetProduct(id);
         }
 
-        [HttpGet("/api/Customers ")]
+        [HttpGet("/api/Customers")]
         public IEnumerable<Customer> GetCustomer()
         {
             return prodContext.GetAllCustomers();
